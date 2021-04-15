@@ -17,14 +17,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
   }
+  if (is_alt_tab_active) {
+      if(IS_LAYER_OFF(layer)) {
+          unregister_code(KC_LALT);
+          is_alt_tab_active = false;
+      }
+  }
   return true;
-}
-
-void matrix_scan_user(void) {
-    if (is_alt_tab_active) {
-        if(IS_LAYER_OFF(layer)) {
-            unregister_code(KC_LALT);
-            is_alt_tab_active = false;
-        }
-    }
 }
